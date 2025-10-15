@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Persona Cultura — Cultural Map Index</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f7fafc; color:#1a202c; }
+    .wrap { max-width: 860px; margin: 40px auto; background:#fff; padding:24px; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,.06);}
+    h1 { margin:0 0 8px; }
+    .tagline { color:#334155; font-size:14px; margin-bottom: 24px; }
+    ul { line-height: 1.9; }
+    a { color:#2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .note { background:#f1f5f9; border-radius:12px; padding:12px 16px; font-size:14px; color:#475569; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 12px; }
+    .card { border:1px solid #e2e8f0; border-radius:12px; padding:16px; }
+    .card h3 { margin-top:0; margin-bottom:8px; font-size:16px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Persona Cultura — Cultural Map</h1>
+    <div class="tagline">Always Align before you Assign.</div>
+
+    <div class="note">
+      <strong>How this works:</strong> Click a link below to open a live, interactive Cultural Map.
+      Upload this folder to GitHub Pages, Netlify, or Vercel. On GitHub Pages, this file should be named <code>index.html</code> in the root.
+    </div>
+
+    <h2>Client maps</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Acorn Tech</h3>
+        <p><a href="Cultural_Map_AcornTech.html">Open Cultural_Map_AcornTech.html</a></p>
+      </div>
+      <div class="card">
+        <h3>RiverCare Health</h3>
+        <p><a href="Cultural_Map_RiverCare.html">Open Cultural_Map_RiverCare.html</a></p>
+      </div>
+    </div>
+
+    <h2>Build your own</h2>
+    <ul>
+      <li>Open <a href="Cultural_Map_Template.html">Cultural_Map_Template.html</a> and paste client data in the JSON block at the top. Save As <code>Cultural_Map_ClientName.html</code>.</li>
+      <li>Or edit <a href="cultural_map_clients_example.json">cultural_map_clients_example.json</a> and use <code>cultural_map_batch_generator.py</code> to create many pages.</li>
+    </ul>
+
+    <h2>Files in this folder</h2>
+    <ul>
+      <li><a href="Cultural_Map_Template.html">Cultural_Map_Template.html</a></li>
+      <li><a href="cultural_map_clients_example.json">cultural_map_clients_example.json</a></li>
+      <li><a href="Cultural_Map_AcornTech.html">Cultural_Map_AcornTech.html</a></li>
+      <li><a href="Cultural_Map_RiverCare.html">Cultural_Map_RiverCare.html</a></li>
+    </ul>
+  </div>
+</body>
+</html>
