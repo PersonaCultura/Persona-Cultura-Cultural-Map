@@ -1,0 +1,390 @@
+{
+  "clients": [
+    {
+      "file_name": "Cultural_Map_AcornTech.html",
+      "orgName": "Acorn Tech",
+      "owner": "M. Diaz, CAO",
+      "updated": "Oct 15, 2025",
+      "teamLabel": "Sales \u2022 Success \u2022 Managers",
+      "brand": {
+        "blue": "#4B9CD3",
+        "orange": "#FC6A03"
+      },
+      "kpis": [
+        {
+          "label": "Ramp time",
+          "value": 78,
+          "hint": "+22% faster",
+          "color": "#4B9CD3"
+        },
+        {
+          "label": "NRR save rate",
+          "value": 71,
+          "hint": "+3 pts",
+          "color": "#FC6A03"
+        },
+        {
+          "label": "Handoff errors",
+          "value": 72,
+          "hint": "-28%",
+          "color": "#10b981"
+        }
+      ],
+      "salesTraits": [
+        {
+          "trait": "Sociability",
+          "target": 8,
+          "score": 7.6,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Endurance",
+          "target": 8.5,
+          "score": 8.1,
+          "min": 7,
+          "max": 10
+        },
+        {
+          "trait": "Assertiveness",
+          "target": 8,
+          "score": 8.9,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Tough",
+          "target": 7.5,
+          "score": 6.3,
+          "min": 6,
+          "max": 9
+        },
+        {
+          "trait": "Structure",
+          "target": 6,
+          "score": 5.7,
+          "min": 5,
+          "max": 7
+        }
+      ],
+      "csTraits": [
+        {
+          "trait": "Nurturance",
+          "min": 7,
+          "max": 10
+        },
+        {
+          "trait": "Responsibility",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Composure",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Coachability",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Order",
+          "min": 6,
+          "max": 8
+        }
+      ],
+      "managerTraits": [
+        {
+          "trait": "Leadership",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Control",
+          "min": 6,
+          "max": 8
+        },
+        {
+          "trait": "Composure",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Responsibility",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Flexibility",
+          "min": 6,
+          "max": 8
+        }
+      ],
+      "heatRows": [
+        {
+          "name": "A. Kim",
+          "role": "AE",
+          "values": [
+            0,
+            1,
+            -1,
+            2,
+            -2
+          ]
+        },
+        {
+          "name": "J. Patel",
+          "role": "AE",
+          "values": [
+            1,
+            0,
+            2,
+            -2,
+            -1
+          ]
+        },
+        {
+          "name": "R. Brooks",
+          "role": "SDR",
+          "values": [
+            -1,
+            -2,
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "name": "S. Rivera",
+          "role": "AM",
+          "values": [
+            2,
+            1,
+            0,
+            -1,
+            -2
+          ]
+        },
+        {
+          "name": "C. Morgan",
+          "role": "AM",
+          "values": [
+            0,
+            -1,
+            1,
+            -2,
+            2
+          ]
+        }
+      ],
+      "frictions": [
+        "Escalations on two enterprise accounts with high Assertiveness",
+        "Missed AM to CS handoff on renewals",
+        "Evening shift error spike tied to low Composure",
+        "SDR ramp lag tied to Structure below band",
+        "Manager coaching load heavy where Coachability is near band"
+      ],
+      "actions": [
+        "Seat move: shift one AE to farmer accounts",
+        "Handoff trim: standardize AM to CS checklist",
+        "Drill: Composure 10 minutes twice weekly in Pod B",
+        "Spec edit: add Endurance 7\u201310 to SDR JD",
+        "Manager huddle: weekly 30 minutes to update the map"
+      ]
+    },
+    {
+      "file_name": "Cultural_Map_RiverCare.html",
+      "orgName": "RiverCare Health",
+      "owner": "Charge Nurse Team",
+      "updated": "Oct 15, 2025",
+      "teamLabel": "Units \u2022 Shifts \u2022 Managers",
+      "brand": {
+        "blue": "#4B9CD3",
+        "orange": "#FC6A03"
+      },
+      "kpis": [
+        {
+          "label": "Readmissions",
+          "value": 74,
+          "hint": "-12 bps",
+          "color": "#10b981"
+        },
+        {
+          "label": "Falls prevented",
+          "value": 62,
+          "hint": "+5 pts",
+          "color": "#4B9CD3"
+        },
+        {
+          "label": "Preceptor load",
+          "value": 69,
+          "hint": "-18%",
+          "color": "#FC6A03"
+        }
+      ],
+      "salesTraits": [
+        {
+          "trait": "Sociability",
+          "target": 7.5,
+          "score": 7.1,
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Endurance",
+          "target": 8,
+          "score": 7.6,
+          "min": 7,
+          "max": 10
+        },
+        {
+          "trait": "Assertiveness",
+          "target": 7,
+          "score": 7.2,
+          "min": 6,
+          "max": 9
+        },
+        {
+          "trait": "Tough",
+          "target": 7,
+          "score": 6.2,
+          "min": 6,
+          "max": 9
+        },
+        {
+          "trait": "Structure",
+          "target": 6,
+          "score": 5.9,
+          "min": 5,
+          "max": 7
+        }
+      ],
+      "csTraits": [
+        {
+          "trait": "Nurturance",
+          "min": 8,
+          "max": 10
+        },
+        {
+          "trait": "Responsibility",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Composure",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Coachability",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Order",
+          "min": 6,
+          "max": 8
+        }
+      ],
+      "managerTraits": [
+        {
+          "trait": "Leadership",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Control",
+          "min": 6,
+          "max": 8
+        },
+        {
+          "trait": "Composure",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Responsibility",
+          "min": 7,
+          "max": 9
+        },
+        {
+          "trait": "Flexibility",
+          "min": 6,
+          "max": 8
+        }
+      ],
+      "heatRows": [
+        {
+          "name": "Unit A",
+          "role": "Day",
+          "values": [
+            0,
+            1,
+            -1,
+            2,
+            -2
+          ]
+        },
+        {
+          "name": "Unit A",
+          "role": "Night",
+          "values": [
+            1,
+            0,
+            2,
+            -2,
+            -1
+          ]
+        },
+        {
+          "name": "Unit B",
+          "role": "Day",
+          "values": [
+            -1,
+            -2,
+            1,
+            2,
+            0
+          ]
+        },
+        {
+          "name": "Unit B",
+          "role": "Night",
+          "values": [
+            2,
+            1,
+            0,
+            -1,
+            -2
+          ]
+        },
+        {
+          "name": "Float",
+          "role": "Mixed",
+          "values": [
+            0,
+            -1,
+            1,
+            -2,
+            2
+          ]
+        }
+      ],
+      "frictions": [
+        "Night shift med errors linked to Composure red",
+        "Discharge delays where Responsibility is low",
+        "Complaint spikes with Assertiveness high on two units",
+        "Slow preceptor ramp tied to Structure below band",
+        "Coachability near band for two charge nurses"
+      ],
+      "actions": [
+        "Swap assignments on Unit B Night",
+        "Add Composure drill to pre-shift huddle",
+        "Standardize Unit A to Unit B handoff checklist",
+        "Adjust hiring spec for Float pool: Endurance 7\u201310",
+        "Weekly CAO huddle to update heatmap"
+      ]
+    }
+  ]
+}
