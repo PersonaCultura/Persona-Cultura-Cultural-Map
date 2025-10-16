@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cultural Map — Graphic Edition</title>
+  <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script defer crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script defer crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script defer crossorigin src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+  <script defer src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background:#f1f5f9; }
+    .band-bg { background:#e5e7eb; }
+    .band-fill { background: linear-gradient(90deg, #4B9CD3, #FC6A03); opacity:.7; }
+    .heat-2 { background:#ef4444; }
+    .heat-1 { background:#fca5a5; }
+    .heat0 { background:#e2e8f0; }
+    .heat1 { background:#fcd34d; }
+    .heat2 { background:#10b981; }
+  </style>
+</head>
+<body>
+  <script type="application/json" id="cultural-map-data">
+  {
+  "orgName": "Acorn Tech",
+  "owner": "M. Diaz, CAO",
+  "updated": "Oct 15, 2025",
+  "teamLabel": "Sales • Success • Managers",
+  "brand": {
+    "blue": "#4B9CD3",
+    "orange": "#FC6A03"
+  },
+  "kpis": [
+    {
+      "label": "Ramp time",
+      "value": 78,
+      "hint": "+22% faster",
+      "color": "#4B9CD3"
+    },
+    {
+      "label": "NRR save rate",
+      "value": 71,
+      "hint": "+3 pts",
+      "color": "#FC6A03"
+    },
+    {
+      "label": "Handoff errors",
+      "value": 72,
+      "hint": "-28%",
+      "color": "#10b981"
+    }
+  ],
+  "salesTraits": [
+    {
+      "trait": "Sociability",
+      "target": 8,
+      "score": 7.6,
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Endurance",
+      "target": 8.5,
+      "score": 8.1,
+      "min": 7,
+      "max": 10
+    },
+    {
+      "trait": "Assertiveness",
+      "target": 8,
+      "score": 8.9,
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Tough",
+      "target": 7.5,
+      "score": 6.3,
+      "min": 6,
+      "max": 9
+    },
+    {
+      "trait": "Structure",
+      "target": 6,
+      "score": 5.7,
+      "min": 5,
+      "max": 7
+    }
+  ],
+  "csTraits": [
+    {
+      "trait": "Nurturance",
+      "min": 7,
+      "max": 10
+    },
+    {
+      "trait": "Responsibility",
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Composure",
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Coachability",
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Order",
+      "min": 6,
+      "max": 8
+    }
+  ],
+  "managerTraits": [
+    {
+      "trait": "Leadership",
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Control",
+      "min": 6,
+      "max": 8
+    },
+    {
+      "trait": "Composure",
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Responsibility",
+      "min": 7,
+      "max": 9
+    },
+    {
+      "trait": "Flexibility",
+      "min": 6,
+      "max": 8
+    }
+  ],
+  "heatRows": [
+    {
+      "name": "A. Kim",
+      "role": "AE",
+      "values": [
+        0,
+        1,
+        -1,
+        2,
+        -2
+      ]
+    },
+    {
+      "name": "J. Patel",
+      "role": "AE",
+      "values": [
+        1,
+        0,
+        2,
+        -2,
+        -1
+      ]
+    },
+    {
+      "name": "R. Brooks",
+      "role": "SDR",
+      "values": [
+        -1,
+        -2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "name": "S. Rivera",
+      "role": "AM",
+      "values": [
+        2,
+        1,
+        0,
+        -1,
+        -2
+      ]
+    },
+    {
+      "name": "C. Morgan",
+      "role": "AM",
+      "values": [
+        0,
+        -1,
+        1,
+        -2,
+        2
+      ]
+    }
+  ],
+  "frictions": [
+    "Escalations on two enterprise accounts with high Assertiveness",
+    "Missed AM to CS handoff on renewals",
+    "Evening shift error spike tied to low Composure",
+    "SDR ramp lag tied to Structure below band",
+    "Manager coaching load heavy where Coachability is near band"
+  ],
+  "actions": [
+    "Seat move: shift one AE to farmer accounts",
+    "Handoff trim: standardize AM to CS checklist",
+    "Drill: Composure 10 minutes twice weekly in Pod B",
+    "Spec edit: add Endurance 7–10 to SDR JD",
+    "Manager huddle: weekly 30 minutes to update the map"
+  ]
+}
+  </script>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react,env">
+    const data = JSON.parse(document.getElementById("cultural-map-data").textContent);
+    const { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar, RadialBarChart, RadialBar, Tooltip } = Recharts;
+    const brand = { blue: (data.brand && data.brand.blue) || "#4B9CD3", orange: (data.brand && data.brand.orange) || "#FC6A03" };
+
+    const BandBar = ({ min, max, score }) => {
+      const pct = v => Math.max(0, Math.min(100, ((v - 1) / 9) * 100));
+      return (
+        <div className="relative h-3 w-full rounded-full band-bg">
+          <div className="absolute top-0 h-3 rounded-full" style={{ left:`${pct(min)}%`, width:`${pct(max)-pct(min)}%`, background:`linear-gradient(90deg, ${brand.blue}, ${brand.orange})`, opacity:.7 }} />
+          {typeof score === "number" && (
+            <div className="absolute -top-[4px] h-4 w-4 rounded-full border-2 border-white shadow"
+                 style={{ left:`calc(${pct(score)}% - 8px)`, backgroundColor:brand.orange }} />
+          )}
+        </div>
+      );
+    };
+
+    const Donut = ({ label, value, hint, color }) => (
+      <div className="flex items-center gap-3 rounded-2xl border p-3">
+        <div className="h-16 w-16">
+          <ResponsiveContainer>
+            <RadialBarChart innerRadius="70%" outerRadius="100%" data={[{ name: label, value }]} startAngle={90} endAngle={-270}>
+              <RadialBar minAngle={15} dataKey="value" cornerRadius={8} fill={color} />
+            </RadialBarChart>
+          </ResponsiveContainer>
+        </div>
+        <div>
+          <div className="text-sm text-slate-500">{label}</div>
+          <div className="text-xl font-semibold text-slate-800">{value}%</div>
+          {hint ? <div className="text-[11px] text-slate-500">{hint}</div> : null}
+        </div>
+      </div>
+    );
+
+    function HeatCell({ v }) {
+      const map = { "-2":"heat-2", "-1":"heat-1", "0":"heat0", "1":"heat1", "2":"heat2" };
+      return <div className={"h-6 w-6 rounded-sm " + map[String(v)]}></div>;
+    }
+
+    function App() {
+      const salesTraits = data.salesTraits || [];
+      const heatRows = data.heatRows || [];
+      const csTraits = data.csTraits || [];
+      const managerTraits = data.managerTraits || [];
+      const kpis = data.kpis || [];
+      const frictions = data.frictions || [];
+      const actions = data.actions || [];
+
+      return (
+        <div className="min-h-screen w-full p-6">
+          <div className="mx-auto max-w-7xl space-y-4">
+            <div className="overflow-hidden rounded-3xl border shadow-sm">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between bg-gradient-to-r from-[#4B9CD3] to-[#FC6A03] px-6 py-6 text-white">
+                <div>
+                  <div className="text-[10px] uppercase tracking-[0.2em] opacity-90">{data.orgName || "Persona Cultura"}</div>
+                  <h1 className="text-2xl font-bold leading-tight">Cultural Map — Graphic Edition</h1>
+                  <div className="text-sm opacity-95">Always Align before you Assign.</div>
+                </div>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div className="rounded-xl bg-white/10 p-2">
+                    <div className="text-[10px]">Owner</div>
+                    <div className="text-sm font-semibold">{data.owner || "CAO"}</div>
+                  </div>
+                  <div className="rounded-xl bg-white/10 p-2">
+                    <div className="text-[10px]">Team</div>
+                    <div className="text-sm font-semibold">{data.teamLabel || "Sales • CS • Managers"}</div>
+                  </div>
+                  <div className="rounded-xl bg-white/10 p-2">
+                    <div className="text-[10px]">Updated</div>
+                    <div className="text-sm font-semibold">{data.updated || ""}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <div className="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                <div className="bg-[#4B9CD3] text-white px-4 py-3 text-sm font-semibold">Role Fit Bands — Sales</div>
+                <div className="p-4 space-y-3">
+                  {salesTraits.map(t => (
+                    <div key={t.trait} className="grid grid-cols-4 items-center gap-2">
+                      <div className="col-span-1 text-sm text-slate-600">{t.trait}</div>
+                      <div className="col-span-3">
+                        <BandBar min={t.min} max={t.max} score={t.score} />
+                        <div className="mt-1 flex items-center justify-between text-[11px] text-slate-500">
+                          <span>Target {t.min}–{t.max}</span>
+                          <span>{typeof t.score === "number" ? ("Team " + t.score) : ""}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="mt-4 h-56">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RadarChart data={salesTraits} cx="50%" cy="50%" outerRadius="80%">
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey="trait" tick={{ fontSize: 11 }} />
+                        <Radar name="Target" dataKey="target" stroke={brand.blue} fill={brand.blue} fillOpacity={0.15} />
+                        <Radar name="Team" dataKey="score" stroke={brand.orange} fill={brand.orange} fillOpacity={0.2} />
+                        <Tooltip />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                <div className="bg-[#FC6A03] text-white px-4 py-3 text-sm font-semibold">Team Heatmap — Gap to Band (Sales)</div>
+                <div className="p-4">
+                  <div className="grid grid-cols-6 gap-2 text-[11px] text-slate-500">
+                    <div className="col-span-2"></div>
+                    {salesTraits.map(t => <div key={t.trait} className="text-center">{t.trait}</div>)}
+                  </div>
+                  <div className="mt-1 space-y-2">
+                    {heatRows.map(r => (
+                      <div key={r.name} className="grid grid-cols-6 items-center gap-2">
+                        <div className="col-span-2 truncate text-sm font-medium text-slate-800">{r.name} <span className="text-[11px] text-slate-500">{r.role}</span></div>
+                        {r.values.map((v, i) => <div key={i} className="flex justify-center"><HeatCell v={v} /></div>)}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-3 flex items-center gap-2 text-[11px] text-slate-500">
+                    <div className="h-3 w-3 rounded-sm heat-2"></div><span>Below band</span>
+                    <div className="h-3 w-3 rounded-sm heat-1"></div><span>Near below</span>
+                    <div className="h-3 w-3 rounded-sm heat0"></div><span>In band</span>
+                    <div className="h-3 w-3 rounded-sm heat1"></div><span>Near above</span>
+                    <div className="h-3 w-3 rounded-sm heat2"></div><span>Above band</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <div className="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                  <div className="bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">Friction Signals</div>
+                  <div className="p-4">
+                    <ul className="space-y-2 text-sm text-slate-700">
+                      {frictions.map((f, idx) => <li key={idx}>• {f}</li>)}
+                    </ul>
+                  </div>
+                </div>
+                <div className="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                  <div className="bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">Action Queue — Next 30 Days</div>
+                  <div className="p-4">
+                    <ol className="list-inside list-decimal space-y-2 text-sm text-slate-800">
+                      {actions.map((a, i) => <li key={i}>{a}</li>)}
+                    </ol>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  {kpis.map(k => (
+                    <div key={k.label} className="rounded-2xl border bg-white p-2">
+                      <div className="h-28">
+                        <ResponsiveContainer>
+                          <RadialBarChart innerRadius="65%" outerRadius="100%" data={[{ name:k.label, value:k.value }]} startAngle={90} endAngle={-270}>
+                            <RadialBar minAngle={15} dataKey="value" cornerRadius={8} fill={k.color || brand.blue} />
+                          </RadialBarChart>
+                        </ResponsiveContainer>
+                      </div>
+                      <div className="text-center pb-2">
+                        <div className="text-sm font-semibold text-slate-800">{k.value}%</div>
+                        <div className="text-[11px] text-slate-500">{k.label} {k.hint ? "(" + k.hint + ")" : ""}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                <div className="bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">Customer Success — Target Bands</div>
+                <div className="p-4 space-y-3">
+                  {(data.csTraits || []).map(t => (
+                    <div key={t.trait} className="grid grid-cols-4 items-center gap-2">
+                      <div className="col-span-1 text-sm text-slate-600">{t.trait}</div>
+                      <div className="col-span-3"><BandBar min={t.min} max={t.max} /></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-3xl border bg-white shadow-sm overflow-hidden">
+                <div className="bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700">Managers — Target Bands</div>
+                <div className="p-4 space-y-3">
+                  {(data.managerTraits || []).map(t => (
+                    <div key={t.trait} className="grid grid-cols-4 items-center gap-2">
+                      <div className="col-span-1 text-sm text-slate-600">{t.trait}</div>
+                      <div className="col-span-3"><BandBar min={t.min} max={t.max} /></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between rounded-2xl border bg-slate-50 px-6 py-3 text-[12px] text-slate-600">
+              <div>Privacy: Pulse is anonymous. Team views show ranges and colors. Individual scores live with CAO and HR.</div>
+              <div className="italic">Prototype visuals for illustration</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const kpis = data.kpis || [];
+    const frictions = data.frictions || [];
+    const actions = data.actions || [];
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
